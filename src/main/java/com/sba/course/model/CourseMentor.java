@@ -9,6 +9,7 @@ public class CourseMentor {
 	private String skill;
 	private Date startDate;
 	private Date endDate;
+	private Float fee;
 	private String status;
 	private String userName;
 	private Float cost;
@@ -55,6 +56,15 @@ public class CourseMentor {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	
+	public Float getFee() {
+		return fee;
+	}
+
+	public void setFee(Float fee) {
+		this.fee = fee;
 	}
 
 	public String getStatus() {

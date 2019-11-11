@@ -222,6 +222,9 @@ public class SbaCourseApi {
 			} else if (status.equals("disabled")) {
 				courseMapper.disableCourseStatus(courseid);
 
+			} else if (status.equals("available")) {
+				courseMapper.enableCourseStatus(courseid);
+
 			} else {
 				courseMapper.updateCourseStatus(courseid, status, 25);
 			}
@@ -256,6 +259,61 @@ public class SbaCourseApi {
 			RspModel rsp = new RspModel();
 			rsp.setCode(200);
 			rsp.setMessage("Update Course");
+			return new ResponseEntity<RspModel>(rsp, HttpStatus.OK);
+
+		} catch (Exception ex) {
+			RspModel rsp = new RspModel();
+			rsp.setCode(500);
+			rsp.setMessage(ex.getMessage());
+			return new ResponseEntity<RspModel>(rsp, HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+	}
+	
+	@RequestMapping(value = "/delete/{courseid}", method = RequestMethod.PUT, produces = "application/json")
+	@ApiOperation(value = "SBA delete Course")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "ok"), @ApiResponse(code = 400, message = "Bad Request"),
+			@ApiResponse(code = 401, message = "No Authroization"), @ApiResponse(code = 403, message = "No Permission"),
+			@ApiResponse(code = 404, message = "No Mentors Found"),
+			@ApiResponse(code = 500, message = "Internal Error") })
+	public ResponseEntity<RspModel> deleteCourse(
+			@ApiParam(name = "courseid", required = true) @PathVariable("courseid") Integer courseid) {
+
+		try {
+
+			courseMapper.deleteCourse(courseid);
+
+			RspModel rsp = new RspModel();
+			rsp.setCode(200);
+			rsp.setMessage("Deleted Course");
+			return new ResponseEntity<RspModel>(rsp, HttpStatus.OK);
+
+		} catch (Exception ex) {
+			RspModel rsp = new RspModel();
+			rsp.setCode(500);
+			rsp.setMessage(ex.getMessage());
+			return new ResponseEntity<RspModel>(rsp, HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+	}
+	
+	@RequestMapping(value = "/updatecourse/{courseid}", method = RequestMethod.PUT, produces = "application/json")
+	@ApiOperation(value = "SBA delete Course")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "ok"), @ApiResponse(code = 400, message = "Bad Request"),
+			@ApiResponse(code = 401, message = "No Authroization"), @ApiResponse(code = 403, message = "No Permission"),
+			@ApiResponse(code = 404, message = "No Mentors Found"),
+			@ApiResponse(code = 500, message = "Internal Error") })
+	public ResponseEntity<RspModel> updateCourse(
+			@ApiParam(name = "courseid", required = true) @PathVariable("courseid") Integer courseid, 
+			@ApiParam(name = "body", required = true) @RequestBody Course course) {
+
+		try {
+
+			courseMapper.updateCourse(course);
+
+			RspModel rsp = new RspModel();
+			rsp.setCode(200);
+			rsp.setMessage("Updated Course");
 			return new ResponseEntity<RspModel>(rsp, HttpStatus.OK);
 
 		} catch (Exception ex) {

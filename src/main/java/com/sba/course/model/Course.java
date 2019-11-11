@@ -15,7 +15,6 @@ public class Course {
 	private String status;
 	private Integer progress;
 	private String userName;
-	private Integer schedule;
 	
 	public Integer getId() {
 		return id;
@@ -85,12 +84,7 @@ public class Course {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	
+	
 
-	public Integer getSchedule() {
-		return schedule;
-	}
-
-	public void setSchedule(Integer schedule) {
-		this.schedule = schedule;
-	}
 }
